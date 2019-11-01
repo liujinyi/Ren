@@ -1,0 +1,10 @@
+/src/main/java/org/calf/reader/novel/dao/
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
