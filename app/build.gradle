@@ -128,12 +128,6 @@ dependencies {
     //MarkDown
     implementation 'ru.noties.markwon:core:3.0.2'
 
-    //epub
-    implementation('nl.siegmann.epublib:epublib-core:3.1') {
-        exclude group: 'org.slf4j'
-        exclude group: 'xmlpull'
-    }
-
 }
 
 greendao {

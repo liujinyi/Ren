@@ -668,12 +668,7 @@ public class PageView extends View implements PageAnimation.OnPageChangeListener
         if (!Objects.equals(bookShelfBean.getTag(), BookShelfBean.LOCAL_TAG)) {
             mPageLoader = new PageLoaderNet(this, bookShelfBean, callback);
         } else {
-            String fileSuffix = FileHelp.getFileSuffix(bookShelfBean.getNoteUrl());
-            if (fileSuffix.equalsIgnoreCase(FileHelp.SUFFIX_EPUB)) {
-                mPageLoader = new PageLoaderEpub(this, bookShelfBean, callback);
-            } else {
-                mPageLoader = new PageLoaderText(this, bookShelfBean, callback);
-            }
+            mPageLoader = new PageLoaderText(this, bookShelfBean, callback);
         }
         // 判断是否 PageView 已经初始化完成
         if (mViewWidth != 0 || mViewHeight != 0) {

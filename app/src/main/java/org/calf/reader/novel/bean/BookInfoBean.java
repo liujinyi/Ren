@@ -1,28 +1,19 @@
 //Copyright (c) 2017. 章钦豪. All rights reserved.
 package org.calf.reader.novel.bean;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
-import org.calf.reader.novel.DbHelper;
+
 import org.calf.reader.novel.R;
 import org.calf.reader.novel.constant.BookType;
 import org.calf.reader.novel.help.BookshelfHelp;
-import org.calf.reader.novel.help.FileHelp;
-import org.calf.reader.novel.utils.MD5Utils;
 import org.calf.reader.novel.utils.StringUtils;
-import org.calf.reader.novel.widget.page.PageLoaderEpub;
-
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Transient;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Objects;
 
 /**
@@ -119,10 +110,6 @@ public class BookInfoBean implements Cloneable {
     }
 
     public String getCoverUrl() {
-        if (isEpub() && (TextUtils.isEmpty(coverUrl) || !(new File(coverUrl)).exists())) {
-            extractEpubCoverImage();
-            return "";
-        }
         return coverUrl;
     }
 
@@ -160,30 +147,6 @@ public class BookInfoBean implements Cloneable {
 
     public void setCharset(String charset) {
         this.charset = charset;
-    }
-
-    private void extractEpubCoverImage() {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    FileHelp.createFolderIfNotExists(coverUrl);
-                    Bitmap cover = BitmapFactory.decodeStream(Objects.requireNonNull(PageLoaderEpub.readBook(new File(noteUrl))).getCoverImage().getInputStream());
-                    String md5Path = FileHelp.getCachePath() + File.separator + "cover" + File.separator + MD5Utils.strToMd5By16(noteUrl) + ".jpg";
-                    FileOutputStream out = new FileOutputStream(new File(md5Path));
-                    cover.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                    out.flush();
-                    out.close();
-                    setCoverUrl(md5Path);
-                    DbHelper.getDaoSession().getBookInfoBeanDao().insertOrReplace(BookInfoBean.this);
-                } catch (Exception ignored) {
-                }
-            }
-        });
-    }
-
-    private boolean isEpub() {
-        return Objects.equals(tag, BookShelfBean.LOCAL_TAG) && noteUrl.toLowerCase().matches(".*\\.epub$");
     }
 
     public String getBookSourceType() {

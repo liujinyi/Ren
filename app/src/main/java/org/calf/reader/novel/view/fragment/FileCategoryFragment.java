@@ -155,7 +155,8 @@ public class FileCategoryFragment extends BaseFileFragment {
         // textView.getCompoundDrawables()[0].mutate();
         try {
             textView.getCompoundDrawables()[0].setColorFilter(getResources().getColor(R.color.tv_text_default), PorterDuff.Mode.SRC_ATOP);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     private void toggleFileTree(File file) {
@@ -221,8 +222,7 @@ public class FileCategoryFragment extends BaseFileFragment {
             //文件内容为空,或者不以txt为开头
             return pathname.isDirectory() ||
                     (pathname.length() != 0
-                            && (pathname.getName().toLowerCase().endsWith(FileHelp.SUFFIX_TXT)
-                            || pathname.getName().toLowerCase().endsWith(FileHelp.SUFFIX_EPUB)));
+                            && pathname.getName().toLowerCase().endsWith(FileHelp.SUFFIX_TXT));
         }
     }
 }
