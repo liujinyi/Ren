@@ -21,7 +21,6 @@ import org.calf.reader.novel.help.ProcessTextHelp;
 import org.calf.reader.novel.help.permission.Permissions;
 import org.calf.reader.novel.help.permission.PermissionsCompat;
 
-import org.calf.reader.novel.service.WebService;
 import org.calf.reader.novel.utils.FileUtils;
 import org.calf.reader.novel.utils.theme.ATH;
 import org.calf.reader.novel.widget.filepicker.picker.FilePicker;
@@ -98,7 +97,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         } else if (key.equals("process_text")) {
             ProcessTextHelp.setProcessTextEnable(sharedPreferences.getBoolean("process_text", true));
         } else if (key.equals("webPort")) {
-            WebService.upHttpServer(settingActivity);
+//            WebService.upHttpServer(settingActivity);
         }
     }
 

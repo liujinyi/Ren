@@ -32,7 +32,6 @@ import org.calf.reader.novel.help.permission.PermissionsCompat;
 import org.calf.reader.novel.model.BookSourceManager;
 import org.calf.reader.novel.presenter.BookSourcePresenter;
 import org.calf.reader.novel.presenter.contract.BookSourceContract;
-import org.calf.reader.novel.service.ShareService;
 import org.calf.reader.novel.utils.ACache;
 import org.calf.reader.novel.utils.FileUtils;
 import org.calf.reader.novel.utils.StringUtils;
@@ -314,7 +313,7 @@ public class BookSourceActivity extends MBaseActivity<BookSourceContract.Present
                 searchView.setQuery("enabled", false);
                 break;
             case R.id.action_share_wifi:
-                ShareService.startThis(this, adapter.getSelectDataList());
+//                ShareService.startThis(this, adapter.getSelectDataList());
                 break;
             case android.R.id.home:
                 finish();

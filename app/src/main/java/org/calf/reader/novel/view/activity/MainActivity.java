@@ -48,7 +48,6 @@ import org.calf.reader.novel.help.permission.PermissionsCompat;
 import org.calf.reader.novel.model.UpLastChapterModel;
 import org.calf.reader.novel.presenter.MainPresenter;
 import org.calf.reader.novel.presenter.contract.MainContract;
-import org.calf.reader.novel.service.WebService;
 import org.calf.reader.novel.utils.ACache;
 import org.calf.reader.novel.utils.NetworkUtils;
 import org.calf.reader.novel.utils.StringUtils;
@@ -460,7 +459,7 @@ public class MainActivity extends BaseTabActivity<MainContract.Presenter> implem
                 }
                 break;
             case R.id.action_web_start:
-                WebService.startThis(this);
+//                WebService.startThis(this);
                 break;
             case android.R.id.home:
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
