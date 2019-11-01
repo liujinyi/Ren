@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "782903874570",
+    "firebase_url": "https://quickstart-1555403947675.firebaseio.com",
+    "project_id": "quickstart-1555403947675",
+    "storage_bucket": "quickstart-1555403947675.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782903874570:android:ee987efd80e44f98e6fbf3",
+        "android_client_info": {
+          "package_name": "org.calf.reader.novel.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782903874570-2bdds1bpjel3r72gac1tc3taparn9jjj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5NfMLl2xf3-uLcGqb8aidKaqtcqbVnR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782903874570-2bdds1bpjel3r72gac1tc3taparn9jjj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
