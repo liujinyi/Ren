@@ -16,25 +16,25 @@
             android:key="@string/pk_bookshelf_px"
             android:title="@string/bookshelf_px" />
 
-        <com.kunfei.bookshelf.widget.prefs.ATESwitchPreference
+        <org.calf.reader.novel.widget.prefs.ATESwitchPreference
             android:defaultValue="true"
             android:key="@string/pk_auto_refresh"
             android:summary="@string/ps_auto_refresh"
             android:title="@string/pt_auto_refresh" />
 
-        <com.kunfei.bookshelf.widget.prefs.ATESwitchPreference
+        <org.calf.reader.novel.widget.prefs.ATESwitchPreference
             android:defaultValue="false"
             android:key="@string/pk_auto_download"
             android:summary="@string/ps_auto_download"
             android:title="@string/pt_auto_download" />
 
-        <com.kunfei.bookshelf.widget.prefs.ATESwitchPreference
+        <org.calf.reader.novel.widget.prefs.ATESwitchPreference
             android:defaultValue="false"
             android:key="@string/pk_default_read"
             android:summary="@string/ps_default_read"
             android:title="@string/pt_default_read" />
 
-        <com.kunfei.bookshelf.widget.prefs.ATESwitchPreference
+        <org.calf.reader.novel.widget.prefs.ATESwitchPreference
             android:defaultValue="true"
             android:key="showAllFind"
             android:summary="@string/ps_show_all_find"
@@ -48,7 +48,7 @@
 
     <org.calf.reader.novel.widget.prefs.ATEPreferenceCategory android:title="其它设置">
 
-        <com.kunfei.bookshelf.widget.prefs.ATESwitchPreference
+        <org.calf.reader.novel.widget.prefs.ATESwitchPreference
             android:defaultValue="true"
             android:key="replaceEnableDefault"
             android:title="默认启用替换净化" />
@@ -57,7 +57,7 @@
             android:key="@string/pk_download_path"
             android:title="@string/download_path" />
 
-        <com.kunfei.bookshelf.widget.number.NumberPickerPreference
+        <org.calf.reader.novel.widget.number.NumberPickerPreference
             android:defaultValue="6"
             android:key="@string/pk_threads_num"
             android:summary="@string/threads_num"
@@ -65,7 +65,7 @@
             app:MaxValue="1024"
             app:MinValue="1" />
 
-        <com.kunfei.bookshelf.widget.number.NumberPickerPreference
+        <org.calf.reader.novel.widget.number.NumberPickerPreference
             android:defaultValue="1122"
             android:key="webPort"
             android:summary="@string/web_port_summary"
@@ -73,13 +73,13 @@
             app:MaxValue="60000"
             app:MinValue="1024" />
 
-        <com.kunfei.bookshelf.widget.prefs.ATESwitchPreference
+        <org.calf.reader.novel.widget.prefs.ATESwitchPreference
             android:defaultValue="false"
             android:key="upChangeSourceLastChapter"
             android:summary="@string/up_change_source_last_chapter_s"
             android:title="@string/up_change_source_last_chapter_t" />
 
-        <com.kunfei.bookshelf.widget.prefs.ATESwitchPreference
+        <org.calf.reader.novel.widget.prefs.ATESwitchPreference
             android:defaultValue="true"
             android:key="process_text"
             android:summary="长按文字在操作菜单中显示阅读·搜索"

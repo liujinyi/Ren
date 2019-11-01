@@ -167,9 +167,9 @@ public class SourceDebugActivity extends MBaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.action_scan:
-                scan();
-                break;
+//            case R.id.action_scan:
+//                scan();
+//                break;
             case android.R.id.home:
                 finish();
                 break;
@@ -177,10 +177,10 @@ public class SourceDebugActivity extends MBaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void scan() {
-        Intent intent = new Intent(this, QRCodeScanActivity.class);
-        startActivityForResult(intent, REQUEST_QR);
-    }
+//    private void scan() {
+//        Intent intent = new Intent(this, QRCodeScanActivity.class);
+//        startActivityForResult(intent, REQUEST_QR);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

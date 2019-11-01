@@ -37,7 +37,6 @@ import org.calf.reader.novel.model.UpLastChapterModel;
 import org.calf.reader.novel.widget.recycler.refresh.RefreshRecyclerView;
 import org.calf.reader.novel.utils.ScreenUtils;
 import org.calf.reader.novel.utils.StringUtils;
-import org.calf.reader.novel.view.activity.SourceEditActivity;
 import org.calf.reader.novel.view.adapter.ChangeSourceAdapter;
 
 import java.util.ArrayList;
@@ -160,7 +159,7 @@ public class ChangeSourceDialog extends BaseDialog implements ChangeSourceAdapte
                         Toast.makeText(context, String.format("%s已删除", sourceBean.getBookSourceName()), Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.menu_edit:
-                        SourceEditActivity.startThis(context, sourceBean);
+//                        SourceEditActivity.startThis(context, sourceBean);
                         break;
                 }
             }

@@ -777,11 +777,11 @@ public class ReadBookActivity extends MBaseActivity<ReadBookContract.Presenter> 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void bindEvent() {
-        tvChapterName.setOnClickListener(v -> {
-            if (mPresenter.getBookSource() != null) {
-                SourceEditActivity.startThis(this, mPresenter.getBookSource());
-            }
-        });
+//        tvChapterName.setOnClickListener(v -> {
+//            if (mPresenter.getBookSource() != null) {
+//                SourceEditActivity.startThis(this, mPresenter.getBookSource());
+//            }
+//        });
         //打开URL
         tvUrl.setOnClickListener(view -> {
             try {

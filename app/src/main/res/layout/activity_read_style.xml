@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kunfei.bookshelf.org.kunfei.bookshelf.view.activity.ReadStyleActivity">
+    tools:context="org.calf.reader.novel.view.activity.ReadStyleActivity">
 
     <LinearLayout
         android:id="@+id/ll_content"

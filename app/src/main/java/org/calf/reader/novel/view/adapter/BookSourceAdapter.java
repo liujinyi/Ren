@@ -16,7 +16,6 @@ import org.calf.reader.novel.help.ItemTouchCallback;
 import org.calf.reader.novel.model.BookSourceManager;
 import org.calf.reader.novel.utils.theme.ThemeStore;
 import org.calf.reader.novel.view.activity.BookSourceActivity;
-import org.calf.reader.novel.view.activity.SourceEditActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -118,7 +117,6 @@ public class BookSourceAdapter extends RecyclerView.Adapter<BookSourceAdapter.My
             activity.saveDate(dataList.get(position));
             activity.upDateSelectAll();
         });
-        holder.editView.setOnClickListener(view -> SourceEditActivity.startThis(activity, dataList.get(position)));
         holder.delView.setOnClickListener(view -> {
             activity.delBookSource(dataList.get(position));
             dataList.remove(position);

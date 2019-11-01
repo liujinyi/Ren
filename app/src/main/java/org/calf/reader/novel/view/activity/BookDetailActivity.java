@@ -353,12 +353,12 @@ public class BookDetailActivity extends MBaseActivity<BookDetailContract.Present
                         mPresenter.getBookShelf().setAllowUpdate(false);
                         mPresenter.addToBookShelf();
                         break;
-                    case R.id.menu_edit:
-                        BookSourceBean sourceBean = BookSourceManager.getBookSourceByUrl(mPresenter.getBookShelf().getTag());
-                        if (sourceBean != null) {
-                            SourceEditActivity.startThis(this, sourceBean);
-                        }
-                        break;
+//                    case R.id.menu_edit:
+//                        BookSourceBean sourceBean = BookSourceManager.getBookSourceByUrl(mPresenter.getBookShelf().getTag());
+//                        if (sourceBean != null) {
+//                            SourceEditActivity.startThis(this, sourceBean);
+//                        }
+//                        break;
                 }
                 return true;
             });

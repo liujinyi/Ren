@@ -277,9 +277,9 @@ public class BookSourceActivity extends MBaseActivity<BookSourceContract.Present
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.action_add_book_source:
-                addBookSource();
-                break;
+//            case R.id.action_add_book_source:
+//                addBookSource();
+//                break;
             case R.id.action_select_all:
                 selectAllDataS();
                 break;
@@ -289,9 +289,9 @@ public class BookSourceActivity extends MBaseActivity<BookSourceContract.Present
             case R.id.action_import_book_source_onLine:
                 importBookSourceOnLine();
                 break;
-            case R.id.action_import_book_source_rwm:
-                scanBookSource();
-                break;
+//            case R.id.action_import_book_source_rwm:
+//                scanBookSource();
+//                break;
             case R.id.action_revert_selection:
                 revertSelection();
                 break;
@@ -353,15 +353,15 @@ public class BookSourceActivity extends MBaseActivity<BookSourceContract.Present
         return preferences.getInt("SourceSort", 0);
     }
 
-    private void scanBookSource() {
-        Intent intent = new Intent(this, QRCodeScanActivity.class);
-        startActivityForResult(intent, REQUEST_QR);
-    }
-
-    private void addBookSource() {
-        Intent intent = new Intent(this, SourceEditActivity.class);
-        startActivityForResult(intent, SourceEditActivity.EDIT_SOURCE);
-    }
+//    private void scanBookSource() {
+//        Intent intent = new Intent(this, QRCodeScanActivity.class);
+//        startActivityForResult(intent, REQUEST_QR);
+//    }
+//
+//    private void addBookSource() {
+//        Intent intent = new Intent(this, SourceEditActivity.class);
+//        startActivityForResult(intent, SourceEditActivity.EDIT_SOURCE);
+//    }
 
     private void deleteDialog() {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
@@ -435,10 +435,10 @@ public class BookSourceActivity extends MBaseActivity<BookSourceContract.Present
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case SourceEditActivity.EDIT_SOURCE:
-                    refreshBookSource();
-                    setResult(RESULT_OK);
-                    break;
+//                case SourceEditActivity.EDIT_SOURCE:
+//                    refreshBookSource();
+//                    setResult(RESULT_OK);
+//                    break;
                 case IMPORT_SOURCE:
                     if (data != null && data.getData() != null) {
                         mPresenter.importBookSourceLocal(FileUtils.getPath(this, data.getData()));

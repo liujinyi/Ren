@@ -40,7 +40,6 @@ import org.calf.reader.novel.widget.recycler.expandable.bean.RecyclerViewData;
 import org.calf.reader.novel.widget.recycler.sectioned.GridSpacingItemDecoration;
 import org.calf.reader.novel.widget.recycler.sectioned.SectionedSpanSizeLookup;
 import org.calf.reader.novel.view.activity.ChoiceBookActivity;
-import org.calf.reader.novel.view.activity.SourceEditActivity;
 import org.calf.reader.novel.view.adapter.FindKindAdapter;
 import org.calf.reader.novel.view.adapter.FindLeftAdapter;
 import org.calf.reader.novel.view.adapter.FindRightAdapter;
@@ -247,7 +246,7 @@ public class FindBookFragment extends MBaseFragment<FindBookContract.Presenter> 
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.menu_edit:
-                    SourceEditActivity.startThis(this, sourceBean);
+//                    SourceEditActivity.startThis(this, sourceBean);
                     break;
                 case R.id.menu_top:
                     BookSourceManager.toTop(sourceBean)
@@ -287,9 +286,9 @@ public class FindBookFragment extends MBaseFragment<FindBookContract.Presenter> 
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == SourceEditActivity.EDIT_SOURCE) {
-                refreshData();
-            }
+//            if (requestCode == SourceEditActivity.EDIT_SOURCE) {
+//                refreshData();
+//            }
         }
     }
 

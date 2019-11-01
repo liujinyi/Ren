@@ -160,7 +160,7 @@
             android:layout_gravity="bottom"
             android:visibility="invisible" />
 
-        <com.kunfei.bookshelf.view.popupwindow.ReadAdjustMarginPop
+        <org.calf.reader.novel.view.popupwindow.ReadAdjustMarginPop
             android:id="@+id/readAdjustMarginPop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
