@@ -115,9 +115,6 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
-    //webServer
-//    implementation 'org.nanohttpd:nanohttpd:2.3.1'
-//    implementation 'org.nanohttpd:nanohttpd-websocket:2.3.1'
 
     //颜色选择
     implementation 'com.jaredrummler:colorpicker:1.1.0'
