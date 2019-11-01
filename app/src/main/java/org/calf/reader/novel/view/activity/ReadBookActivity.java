@@ -38,6 +38,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.hwangjr.rxbus.RxBus;
+
 import org.calf.basemvplib.AppActivityManager;
 import org.calf.basemvplib.BitIntentDataManager;
 import org.calf.reader.novel.DbHelper;
@@ -90,9 +91,6 @@ import org.calf.reader.novel.widget.page.PageLoaderNet;
 import org.calf.reader.novel.widget.page.PageView;
 import org.calf.reader.novel.widget.page.TxtChapter;
 import org.calf.reader.novel.widget.page.animation.PageAnimation;
-
-import org.calf.reader.novel.view.popupwindow.ReadAdjustMarginPop;
-import org.calf.reader.novel.widget.page.TxtChapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
