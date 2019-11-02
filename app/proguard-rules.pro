@@ -159,14 +159,18 @@
 -keep class **.web.**{*;}
 
 ### greenDAO 3
--keep class org.greenrobot.greendao.**{ *; }
+-keep class org.greenrobot.greendao.**{*;}
 -keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
 public static java.lang.String TABLENAME;
 }
 -keep class **$Properties
--dontwarn org.greenrobot.greendao.database.**
--dontwarn rx.**
+-keep class net.sqlcipher.database.**{*;}
+-keep public interface net.sqlcipher.database.**
+-dontwarn net.sqlcipher.database.**
+-dontwarn org.greenrobot.greendao.**
+-keep class org.calf.reader.novel.dao.**{*;}
 
+-dontwarn rx.**
 -dontwarn okio.**
 -dontwarn retrofit2.**
 -dontwarn javax.annotation.**

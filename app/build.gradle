@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'org.greenrobot.greendao'
-apply plugin: 'io.fabric'
 apply plugin: "de.timfreiheit.resourceplaceholders"
 
 static def releaseTime() {
@@ -41,7 +40,7 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.myConfig
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
@@ -127,9 +126,4 @@ greendao {
     schemaVersion 64
     daoPackage 'org.calf.reader.novel.dao'
     targetGenDir 'src/main/java'
-}
-
-//apply plugin: 'com.google.gms.google-services'
-repositories {
-    mavenCentral()
 }
