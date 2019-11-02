@@ -57,7 +57,6 @@ import org.calf.reader.novel.utils.theme.ThemeStore;
 import org.calf.reader.novel.view.fragment.BookListFragment;
 import org.calf.reader.novel.view.fragment.FindBookFragment;
 import org.calf.reader.novel.widget.modialog.InputDialog;
-import org.calf.reader.novel.widget.modialog.MoDialogHUD;
 
 import java.util.Arrays;
 import java.util.List;
@@ -86,7 +85,6 @@ public class MainActivity extends BaseTabActivity<MainContract.Presenter> implem
     private int group;
     private boolean viewIsList;
     private ActionBarDrawerToggle mDrawerToggle;
-    private MoDialogHUD moDialogHUD;
     private long exitTime = 0;
     private boolean resumed = false;
     private Handler handler = new Handler();
@@ -156,6 +154,16 @@ public class MainActivity extends BaseTabActivity<MainContract.Presenter> implem
     }
 
     @Override
+    public void dismissHUD() {
+
+    }
+
+    @Override
+    public void onRestore(String msg) {
+
+    }
+
+    @Override
     protected void initData() {
         viewIsList = preferences.getBoolean("bookshelfIsList", true);
         mTitles = new String[]{getString(R.string.bookshelf), getString(R.string.find)};
@@ -208,7 +216,6 @@ public class MainActivity extends BaseTabActivity<MainContract.Presenter> implem
         initDrawer();
         initTabLayout();
         upGroup(group);
-        moDialogHUD = new MoDialogHUD(this);
         if (!preferences.getBoolean("behaviorMain", true)) {
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
             params.setScrollFlags(0);
@@ -630,8 +637,6 @@ public class MainActivity extends BaseTabActivity<MainContract.Presenter> implem
             preferences.edit()
                     .putInt("versionCode", MApplication.getVersionCode())
                     .apply();
-            //更新日志
-            moDialogHUD.showAssetMarkdown("updateLog.md");
         }
     }
 
@@ -654,22 +659,10 @@ public class MainActivity extends BaseTabActivity<MainContract.Presenter> implem
         }, 60 * 1000);
     }
 
-    @Override
-    public void dismissHUD() {
-        moDialogHUD.dismiss();
-    }
-
-    public void onRestore(String msg) {
-        moDialogHUD.showLoading(msg);
-    }
-
     @SuppressLint("RtlHardcoded")
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Boolean mo = moDialogHUD.onKeyDown(keyCode, event);
-        if (mo) {
-            return true;
-        } else if (mTlIndicator.getSelectedTabPosition() != 0) {
+        if (mTlIndicator.getSelectedTabPosition() != 0) {
             Objects.requireNonNull(mTlIndicator.getTabAt(0)).select();
             return true;
         } else {

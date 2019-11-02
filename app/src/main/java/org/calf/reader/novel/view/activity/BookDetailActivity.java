@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.hwangjr.rxbus.RxBus;
+
 import org.calf.basemvplib.AppActivityManager;
 import org.calf.basemvplib.BitIntentDataManager;
 import org.calf.reader.novel.DbHelper;
@@ -31,19 +32,16 @@ import org.calf.reader.novel.R;
 import org.calf.reader.novel.base.MBaseActivity;
 import org.calf.reader.novel.bean.BookInfoBean;
 import org.calf.reader.novel.bean.BookShelfBean;
-import org.calf.reader.novel.bean.BookSourceBean;
 import org.calf.reader.novel.bean.SearchBookBean;
 import org.calf.reader.novel.constant.RxBusTag;
 import org.calf.reader.novel.help.BlurTransformation;
 import org.calf.reader.novel.help.BookshelfHelp;
-import org.calf.reader.novel.model.BookSourceManager;
 import org.calf.reader.novel.presenter.BookDetailPresenter;
 import org.calf.reader.novel.presenter.ReadBookPresenter;
 import org.calf.reader.novel.presenter.contract.BookDetailContract;
 import org.calf.reader.novel.utils.StringUtils;
 import org.calf.reader.novel.widget.CoverImageView;
 import org.calf.reader.novel.widget.modialog.ChangeSourceDialog;
-import org.calf.reader.novel.widget.modialog.MoDialogHUD;
 
 import java.io.File;
 import java.util.Objects;
@@ -85,7 +83,6 @@ public class BookDetailActivity extends MBaseActivity<BookDetailContract.Present
     @BindView(R.id.tv_chapter_size)
     TextView tvChapterSize;
 
-    private MoDialogHUD moDialogHUD;
     private String author;
     private BookShelfBean bookShelfBean;
     private String coverPath;
@@ -123,8 +120,6 @@ public class BookDetailActivity extends MBaseActivity<BookDetailContract.Present
     @Override
     protected void bindView() {
         ButterKnife.bind(this);
-        //弹窗
-        moDialogHUD = new MoDialogHUD(this);
         tvIntro.setMovementMethod(ScrollingMovementMethod.getInstance());
         if (mPresenter.getOpenFrom() == BookDetailPresenter.FROM_BOOKSHELF) {
             updateView();
@@ -416,8 +411,6 @@ public class BookDetailActivity extends MBaseActivity<BookDetailContract.Present
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Boolean mo = moDialogHUD.onKeyDown(keyCode, event);
-        if (mo) return true;
         return super.onKeyDown(keyCode, event);
     }
 
@@ -429,7 +422,6 @@ public class BookDetailActivity extends MBaseActivity<BookDetailContract.Present
 
     @Override
     public void onDestroy() {
-        moDialogHUD.dismiss();
         super.onDestroy();
     }
 }

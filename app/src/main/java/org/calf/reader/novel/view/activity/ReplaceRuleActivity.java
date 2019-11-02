@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.hwangjr.rxbus.RxBus;
+
 import org.calf.basemvplib.BitIntentDataManager;
 import org.calf.reader.novel.R;
 import org.calf.reader.novel.base.MBaseActivity;
@@ -35,11 +36,10 @@ import org.calf.reader.novel.utils.ACache;
 import org.calf.reader.novel.utils.FileUtils;
 import org.calf.reader.novel.utils.StringUtils;
 import org.calf.reader.novel.utils.theme.ThemeStore;
+import org.calf.reader.novel.view.adapter.ReplaceRuleAdapter;
 import org.calf.reader.novel.widget.filepicker.picker.FilePicker;
 import org.calf.reader.novel.widget.modialog.InputDialog;
-import org.calf.reader.novel.widget.modialog.MoDialogHUD;
 import org.calf.reader.novel.widget.modialog.ReplaceRuleDialog;
-import org.calf.reader.novel.view.adapter.ReplaceRuleAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,7 +65,6 @@ public class ReplaceRuleActivity extends MBaseActivity<ReplaceRuleContract.Prese
     RecyclerView recyclerView;
 
     private BookShelfBean bookShelfBean;
-    private MoDialogHUD moDialogHUD;
     private ReplaceRuleAdapter adapter;
     private boolean selectAll = true;
 
@@ -103,7 +102,6 @@ public class ReplaceRuleActivity extends MBaseActivity<ReplaceRuleContract.Prese
         this.setSupportActionBar(toolbar);
         setupActionBar();
         initRecyclerView();
-        moDialogHUD = new MoDialogHUD(this);
         refresh();
     }
 
@@ -254,16 +252,11 @@ public class ReplaceRuleActivity extends MBaseActivity<ReplaceRuleContract.Prese
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Boolean mo = moDialogHUD.onKeyDown(keyCode, event);
-        if (mo) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
             return true;
-        } else {
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                finish();
-                return true;
-            }
-            return super.onKeyDown(keyCode, event);
         }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

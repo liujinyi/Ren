@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.textfield.TextInputLayout;
 import com.hwangjr.rxbus.RxBus;
+
 import org.calf.basemvplib.impl.IPresenter;
 import org.calf.reader.novel.R;
 import org.calf.reader.novel.base.MBaseActivity;
@@ -27,11 +28,9 @@ import org.calf.reader.novel.constant.RxBusTag;
 import org.calf.reader.novel.help.BookshelfHelp;
 import org.calf.reader.novel.help.permission.Permissions;
 import org.calf.reader.novel.help.permission.PermissionsCompat;
-
 import org.calf.reader.novel.utils.FileUtils;
 import org.calf.reader.novel.utils.SoftInputUtil;
 import org.calf.reader.novel.utils.theme.ThemeStore;
-import org.calf.reader.novel.widget.modialog.MoDialogHUD;
 
 import java.io.File;
 
@@ -72,7 +71,6 @@ public class BookInfoEditActivity extends MBaseActivity {
 
     private String noteUrl;
     private BookShelfBean book;
-    private MoDialogHUD moDialogHUD;
 
 
     public static void startThis(Context context, String noteUrl) {
@@ -118,7 +116,6 @@ public class BookInfoEditActivity extends MBaseActivity {
         tilBookAuthor.setHint(getString(R.string.author));
         tilCoverUrl.setHint(getString(R.string.cover_path));
         tilBookJj.setHint(getString(R.string.book_intro));
-        moDialogHUD = new MoDialogHUD(this);
     }
 
     /**
@@ -152,12 +149,12 @@ public class BookInfoEditActivity extends MBaseActivity {
     protected void bindEvent() {
         super.bindEvent();
         tvSelectCover.setOnClickListener(view -> selectCover());
-        tvChangeCover.setOnClickListener(view ->{
+        tvChangeCover.setOnClickListener(view -> {
             Intent intent = new Intent(BookInfoEditActivity.this, BookCoverEditActivity.class);
-            intent.putExtra("name",book.getBookInfoBean().getName());
-            intent.putExtra("author",book.getBookInfoBean().getAuthor());
+            intent.putExtra("name", book.getBookInfoBean().getName());
+            intent.putExtra("author", book.getBookInfoBean().getAuthor());
             startActivityForResult(intent, ResultEditCover);
-                });
+        });
         tvRefreshCover.setOnClickListener(view -> {
             book.setCustomCoverPath(tieCoverUrl.getText().toString());
             initCover();
@@ -250,14 +247,11 @@ public class BookInfoEditActivity extends MBaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Boolean mo = moDialogHUD.onKeyDown(keyCode, event);
-        if (mo) return true;
         return super.onKeyDown(keyCode, event);
     }
 
     @Override
     public void onDestroy() {
-        moDialogHUD.dismiss();
         super.onDestroy();
     }
 

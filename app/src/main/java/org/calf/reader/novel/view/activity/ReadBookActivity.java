@@ -84,7 +84,6 @@ import org.calf.reader.novel.widget.modialog.BookmarkDialog;
 import org.calf.reader.novel.widget.modialog.ChangeSourceDialog;
 import org.calf.reader.novel.widget.modialog.DownLoadDialog;
 import org.calf.reader.novel.widget.modialog.InputDialog;
-import org.calf.reader.novel.widget.modialog.MoDialogHUD;
 import org.calf.reader.novel.widget.modialog.ReplaceRuleDialog;
 import org.calf.reader.novel.widget.page.PageLoader;
 import org.calf.reader.novel.widget.page.PageLoaderNet;
@@ -168,7 +167,6 @@ public class ReadBookActivity extends MBaseActivity<ReadBookContract.Presenter> 
     private int upHpbInterval = 100;
     private Menu menu;
     private CheckAddShelfPop checkAddShelfPop;
-    private MoDialogHUD moDialogHUD;
     private ThisBatInfoReceiver batInfoReceiver;
     private ReadBookControl readBookControl = ReadBookControl.getInstance();
 
@@ -515,8 +513,6 @@ public class ReadBookActivity extends MBaseActivity<ReadBookContract.Presenter> 
         appBar.setPadding(0, ScreenUtils.getStatusBarHeight(), 0, 0);
         appBar.setBackgroundColor(ThemeStore.primaryColor(this));
         readBottomMenu.setFabNightTheme(isNightTheme());
-        //弹窗
-        moDialogHUD = new MoDialogHUD(this);
         initBottomMenu();
         initReadInterfacePop();
         initReadAdjustPop();
@@ -930,28 +926,7 @@ public class ReadBookActivity extends MBaseActivity<ReadBookContract.Presenter> 
 
                     @Override
                     public void vipPop() {
-                        moDialogHUD.showTwoButton(ReadBookActivity.this.getString(R.string.donate_s), "领取红包", (v) -> {
-                                    DonateActivity.getZfbHb(ReadBookActivity.this);
-                                    mHandler.postDelayed(() -> {
-                                        ReadBookActivity.this.refreshDurChapter();
-                                        moDialogHUD.dismiss();
-                                    }, 2000);
-                                },
-                                "关注公众号",
-                                (v) -> {
-                                    ClipboardManager clipboard = (ClipboardManager) ReadBookActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
-                                    ClipData clipData = ClipData.newPlainText(null, "开源阅读软件");
-                                    if (clipboard != null) {
-                                        clipboard.setPrimaryClip(clipData);
-                                        toast("[开源阅读软件],已复制成功,可到微信搜索");
-                                    }
-                                    MApplication.getInstance().upDonateHb();
-                                    mHandler.postDelayed(() -> {
-                                        ReadBookActivity.this.refreshDurChapter();
-                                        moDialogHUD.dismiss();
-                                    }, 1000);
-                                },
-                                true);
+                        ReadBookActivity.this.refreshDurChapter();
                     }
                 }
         );
@@ -1133,8 +1108,6 @@ public class ReadBookActivity extends MBaseActivity<ReadBookContract.Presenter> 
 
                                                 pageView.setSelectMode(PageView.SelectMode.Normal);
 
-                                                moDialogHUD.dismiss();
-
                                                 refresh(false);
                                             }
                                         })).show();
@@ -1194,10 +1167,10 @@ public class ReadBookActivity extends MBaseActivity<ReadBookContract.Presenter> 
                 showBookmark(null);
                 break;
             case R.id.action_copy_text:
-                popMenuOut();
-                if (mPageLoader != null) {
-                    moDialogHUD.showText(mPageLoader.getAllContent());
-                }
+//                popMenuOut();
+//                if (mPageLoader != null) {
+//                    moDialogHUD.showText(mPageLoader.getAllContent());
+//                }
                 break;
             case R.id.disable_book_source:
                 mPresenter.disableDurBookSource();
@@ -1649,55 +1622,50 @@ public class ReadBookActivity extends MBaseActivity<ReadBookContract.Presenter> 
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Boolean mo = moDialogHUD.onKeyDown(keyCode, event);
-        if (mo) {
-            return true;
-        } else {
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                if (readInterfacePop.getVisibility() == View.VISIBLE
-                        || readAdjustPop.getVisibility() == View.VISIBLE
-                        || readAdjustMarginPop.getVisibility() == View.VISIBLE
-                        || moreSettingPop.getVisibility() == View.VISIBLE) {
-                    popMenuOut();
-                    return true;
-                } else if (flMenu.getVisibility() == View.VISIBLE) {
-                    finish();
-                    return true;
-                } else if (ReadAloudService.running && aloudStatus == ReadAloudService.Status.PLAY) {
-                    ReadAloudService.pause(this);
-                    if (!mPresenter.getBookShelf().isAudio()) {
-                        toast(R.string.read_aloud_pause);
-                    }
-                    return true;
-                } else {
-                    finish();
-                    return true;
-                }
-            } else if (keyCode == KeyEvent.KEYCODE_MENU) {
-                if (flMenu.getVisibility() == View.VISIBLE) {
-                    popMenuOut();
-                } else {
-                    popMenuIn();
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (readInterfacePop.getVisibility() == View.VISIBLE
+                    || readAdjustPop.getVisibility() == View.VISIBLE
+                    || readAdjustMarginPop.getVisibility() == View.VISIBLE
+                    || moreSettingPop.getVisibility() == View.VISIBLE) {
+                popMenuOut();
+                return true;
+            } else if (flMenu.getVisibility() == View.VISIBLE) {
+                finish();
+                return true;
+            } else if (ReadAloudService.running && aloudStatus == ReadAloudService.Status.PLAY) {
+                ReadAloudService.pause(this);
+                if (!mPresenter.getBookShelf().isAudio()) {
+                    toast(R.string.read_aloud_pause);
                 }
                 return true;
-            } else if (flMenu.getVisibility() != View.VISIBLE) {
-                if (readBookControl.getCanKeyTurn(aloudStatus == ReadAloudService.Status.PLAY) && keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-                    if (mPageLoader != null) {
-                        mPageLoader.skipToNextPage();
-                    }
-                    return true;
-                } else if (readBookControl.getCanKeyTurn(aloudStatus == ReadAloudService.Status.PLAY) && keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-                    if (mPageLoader != null) {
-                        mPageLoader.skipToPrePage();
-                    }
-                    return true;
-                } else if (keyCode == KeyEvent.KEYCODE_SPACE) {
-                    nextPage();
-                    return true;
-                }
+            } else {
+                finish();
+                return true;
             }
-            return super.onKeyDown(keyCode, event);
+        } else if (keyCode == KeyEvent.KEYCODE_MENU) {
+            if (flMenu.getVisibility() == View.VISIBLE) {
+                popMenuOut();
+            } else {
+                popMenuIn();
+            }
+            return true;
+        } else if (flMenu.getVisibility() != View.VISIBLE) {
+            if (readBookControl.getCanKeyTurn(aloudStatus == ReadAloudService.Status.PLAY) && keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+                if (mPageLoader != null) {
+                    mPageLoader.skipToNextPage();
+                }
+                return true;
+            } else if (readBookControl.getCanKeyTurn(aloudStatus == ReadAloudService.Status.PLAY) && keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+                if (mPageLoader != null) {
+                    mPageLoader.skipToPrePage();
+                }
+                return true;
+            } else if (keyCode == KeyEvent.KEYCODE_SPACE) {
+                nextPage();
+                return true;
+            }
         }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
