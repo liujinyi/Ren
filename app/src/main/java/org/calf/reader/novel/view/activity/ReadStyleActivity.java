@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -28,8 +27,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
 import com.hwangjr.rxbus.RxBus;
-import com.jaredrummler.android.colorpicker.ColorPickerDialog;
-import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
+
 import org.calf.basemvplib.impl.IPresenter;
 import org.calf.reader.novel.R;
 import org.calf.reader.novel.base.MBaseActivity;
@@ -37,7 +35,6 @@ import org.calf.reader.novel.constant.RxBusTag;
 import org.calf.reader.novel.help.ReadBookControl;
 import org.calf.reader.novel.help.permission.Permissions;
 import org.calf.reader.novel.help.permission.PermissionsCompat;
-
 import org.calf.reader.novel.utils.BitmapUtil;
 import org.calf.reader.novel.utils.FileUtils;
 import org.calf.reader.novel.utils.MeUtils;
@@ -54,7 +51,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import kotlin.Unit;
 
-public class ReadStyleActivity extends MBaseActivity implements ColorPickerDialogListener {
+public class ReadStyleActivity extends MBaseActivity {
     private final int ResultSelectBg = 103;
     private final int SELECT_TEXT_COLOR = 201;
     private final int SELECT_BG_COLOR = 301;
@@ -67,10 +64,6 @@ public class ReadStyleActivity extends MBaseActivity implements ColorPickerDialo
     Toolbar toolbar;
     @BindView(R.id.tv_content)
     TextView tvContent;
-    @BindView(R.id.tvSelectTextColor)
-    TextView tvSelectTextColor;
-    @BindView(R.id.tvSelectBgColor)
-    TextView tvSelectBgColor;
     @BindView(R.id.tvSelectBgImage)
     TextView tvSelectBgImage;
     @BindView(R.id.tvDefault)
@@ -167,23 +160,8 @@ public class ReadStyleActivity extends MBaseActivity implements ColorPickerDialo
                 llBottom.setVisibility(View.VISIBLE);
             } else {
                 llBottom.setVisibility(View.GONE);
-            }});
-        //选择文字颜色
-        tvSelectTextColor.setOnClickListener(view ->
-                ColorPickerDialog.newBuilder()
-                        .setColor(textColor)
-                        .setShowAlphaSlider(false)
-                        .setDialogType(ColorPickerDialog.TYPE_CUSTOM)
-                        .setDialogId(SELECT_TEXT_COLOR)
-                        .show(ReadStyleActivity.this));
-        //选择背景颜色
-        tvSelectBgColor.setOnClickListener(view ->
-                ColorPickerDialog.newBuilder()
-                        .setColor(bgColor)
-                        .setShowAlphaSlider(false)
-                        .setDialogType(ColorPickerDialog.TYPE_CUSTOM)
-                        .setDialogId(SELECT_BG_COLOR)
-                        .show(ReadStyleActivity.this));
+            }
+        });
 
         //背景图列表
         bgImgListAdapter = new BgImgListAdapter(this);
@@ -347,35 +325,6 @@ public class ReadStyleActivity extends MBaseActivity implements ColorPickerDialo
         }
     }
 
-    /**
-     * Callback that is invoked when a color is selected from the color picker dialog.
-     * @param dialogId The dialog id used to create the dialog instance.
-     * @param color    The selected color
-     */
-    @Override
-    public void onColorSelected(int dialogId, int color) {
-        switch (dialogId) {
-            case SELECT_TEXT_COLOR:
-                textColor = color;
-                upText();
-                break;
-            case SELECT_BG_COLOR:
-                bgCustom = 1;
-                bgColor = color;
-                bgDrawable = new ColorDrawable(bgColor);
-                upBg();
-        }
-    }
-
-    /**
-     * Callback that is invoked when the color picker dialog was dismissed.
-     * @param dialogId The dialog id used to create the dialog instance.
-     */
-    @Override
-    public void onDialogDismissed(int dialogId) {
-
-    }
-
     private static class BgImgListAdapter extends BaseAdapter {
         private Context context;
         private LayoutInflater mInflater;
@@ -427,14 +376,14 @@ public class ReadStyleActivity extends MBaseActivity implements ColorPickerDialo
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
-            if(convertView==null){
+            if (convertView == null) {
                 holder = new ViewHolder();
                 convertView = mInflater.inflate(R.layout.item_read_bg, null);
                 holder.mImage = convertView.findViewById(R.id.iv_cover);
                 holder.mTitle = convertView.findViewById(R.id.tv_desc);
                 convertView.setTag(holder);
             } else {
-                holder = (ViewHolder)convertView.getTag();
+                holder = (ViewHolder) convertView.getTag();
             }
             if (position == 0) {
                 holder.mTitle.setText("选择背景");
@@ -469,7 +418,7 @@ public class ReadStyleActivity extends MBaseActivity implements ColorPickerDialo
         }
 
         private static class ViewHolder {
-            private TextView mTitle ;
+            private TextView mTitle;
             private ImageView mImage;
         }
 

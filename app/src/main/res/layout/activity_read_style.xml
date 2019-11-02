@@ -55,34 +55,6 @@
             android:padding="6dp">
 
             <org.calf.reader.novel.widget.views.ATEStrokeTextView
-                android:id="@+id/tvSelectTextColor"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="6dp"
-                android:layout_weight="1"
-                android:singleLine="true"
-                android:gravity="center"
-                android:padding="6dp"
-                android:text="文字颜色"
-                android:textSize="14sp"
-                tools:ignore="HardcodedText" />
-
-            <org.calf.reader.novel.widget.views.ATEStrokeTextView
-                android:id="@+id/tvSelectBgColor"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="6dp"
-                android:layout_weight="1"
-                android:singleLine="true"
-                android:gravity="center"
-                android:padding="6dp"
-                android:text="背景颜色"
-                android:textSize="14sp"
-                tools:ignore="HardcodedText" />
-
-            <org.calf.reader.novel.widget.views.ATEStrokeTextView
                 android:id="@+id/tvSelectBgImage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
