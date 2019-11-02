@@ -35,6 +35,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.hwangjr.rxbus.RxBus;
+
 import org.calf.reader.novel.BuildConfig;
 import org.calf.reader.novel.DbHelper;
 import org.calf.reader.novel.MApplication;
@@ -51,7 +52,6 @@ import org.calf.reader.novel.presenter.contract.MainContract;
 import org.calf.reader.novel.utils.ACache;
 import org.calf.reader.novel.utils.NetworkUtils;
 import org.calf.reader.novel.utils.StringUtils;
-import org.calf.reader.novel.utils.theme.ATH;
 import org.calf.reader.novel.utils.theme.NavigationViewUtil;
 import org.calf.reader.novel.utils.theme.ThemeStore;
 import org.calf.reader.novel.view.fragment.BookListFragment;
@@ -435,22 +435,6 @@ public class MainActivity extends BaseTabActivity<MainContract.Presenter> implem
                         })
                         .request();
                 break;
-            case R.id.action_add_url:
-                InputDialog.builder(this)
-                        .setTitle(getString(R.string.add_book_url))
-                        .setCallback(new InputDialog.Callback() {
-                            @Override
-                            public void setInputText(String inputText) {
-                                inputText = StringUtils.trim(inputText);
-                                mPresenter.addBookUrl(inputText);
-                            }
-
-                            @Override
-                            public void delete(String value) {
-
-                            }
-                        }).show();
-                break;
             case R.id.action_download_all:
                 if (!NetworkUtils.isNetWorkAvailable())
                     toast(R.string.network_connection_unavailable);
@@ -464,9 +448,6 @@ public class MainActivity extends BaseTabActivity<MainContract.Presenter> implem
                 if (getBookListFragment() != null) {
                     getBookListFragment().setArrange(true);
                 }
-                break;
-            case R.id.action_web_start:
-//                WebService.startThis(this);
                 break;
             case android.R.id.home:
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -547,18 +528,6 @@ public class MainActivity extends BaseTabActivity<MainContract.Presenter> implem
                 case R.id.action_setting:
                     handler.postDelayed(() -> SettingActivity.startThis(this), 200);
                     break;
-                case R.id.action_about:
-//                    handler.postDelayed(() -> AboutActivity.startThis(this), 200);
-                    break;
-                case R.id.action_donate:
-                    handler.postDelayed(() -> DonateActivity.startThis(this), 200);
-                    break;
-                case R.id.action_backup:
-                    handler.postDelayed(this::backup, 200);
-                    break;
-                case R.id.action_restore:
-                    handler.postDelayed(this::restore, 200);
-                    break;
                 case R.id.action_theme:
                     handler.postDelayed(() -> ThemeSettingActivity.startThis(this), 200);
                     break;
@@ -588,44 +557,6 @@ public class MainActivity extends BaseTabActivity<MainContract.Presenter> implem
                     preferences.edit().putInt("bookshelfLayout", which).apply();
                     recreate();
                 }).show();
-    }
-
-    /**
-     * 备份
-     */
-    private void backup() {
-        new PermissionsCompat.Builder(this)
-                .addPermissions(Permissions.READ_EXTERNAL_STORAGE, Permissions.WRITE_EXTERNAL_STORAGE)
-                .rationale(R.string.backup_permission)
-                .onGranted((requestCode) -> {
-                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
-                            .setTitle(R.string.backup_confirmation)
-                            .setMessage(R.string.backup_message)
-                            .setPositiveButton(R.string.ok, (dialog, which) -> mPresenter.backupData())
-                            .setNegativeButton(R.string.cancel, null)
-                            .show();
-                    ATH.setAlertDialogTint(alertDialog);
-                    return Unit.INSTANCE;
-                }).request();
-    }
-
-    /**
-     * 恢复
-     */
-    private void restore() {
-        new PermissionsCompat.Builder(this)
-                .addPermissions(Permissions.READ_EXTERNAL_STORAGE, Permissions.WRITE_EXTERNAL_STORAGE)
-                .rationale(R.string.restore_permission)
-                .onGranted((requestCode) -> {
-                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
-                            .setTitle(R.string.restore_confirmation)
-                            .setMessage(R.string.restore_message)
-                            .setPositiveButton(R.string.ok, (dialog, which) -> mPresenter.restoreData())
-                            .setNegativeButton(R.string.cancel, null)
-                            .show();
-                    ATH.setAlertDialogTint(alertDialog);
-                    return Unit.INSTANCE;
-                }).request();
     }
 
     /**

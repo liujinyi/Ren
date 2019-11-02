@@ -38,42 +38,6 @@ import io.reactivex.schedulers.Schedulers;
 public class MainPresenter extends BasePresenterImpl<MainContract.View> implements MainContract.Presenter {
 
     @Override
-    public void backupData() {
-        DataBackup.getInstance().run();
-    }
-
-    @Override
-    public void restoreData() {
-        mView.onRestore(mView.getContext().getString(R.string.on_restore));
-        Observable.create((ObservableOnSubscribe<Boolean>) e -> {
-            if (DataRestore.getInstance().run()) {
-                e.onNext(true);
-            } else {
-                e.onNext(false);
-            }
-            e.onComplete();
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserver<Boolean>() {
-                    @Override
-                    public void onNext(Boolean value) {
-                        mView.dismissHUD();
-                        mView.toast(R.string.restore_success);
-                        //更新书架并刷新
-                        mView.recreate();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        mView.dismissHUD();
-                        mView.toast(R.string.restore_fail);
-                    }
-                });
-    }
-
-    @Override
     public void addBookUrl(String bookUrls) {
         bookUrls = bookUrls.trim();
         if (TextUtils.isEmpty(bookUrls)) return;
