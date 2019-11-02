@@ -49,12 +49,6 @@
     </item>
 
     <item
-        android:id="@+id/action_add_book_source"
-        android:icon="@drawable/ic_add"
-        android:title="@string/add_book_source"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_import_book_source_local"
         android:icon="@drawable/ic_import"
         android:title="@string/import_book_source_local"
@@ -94,12 +88,6 @@
         android:id="@+id/action_check_book_source"
         android:icon="@drawable/ic_check_source"
         android:title="@string/check_select_source"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_share_wifi"
-        android:icon="@drawable/ic_share"
-        android:title="@string/wifi_share"
         app:showAsAction="never" />
 
 </menu>
