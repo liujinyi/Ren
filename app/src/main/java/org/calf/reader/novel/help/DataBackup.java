@@ -9,6 +9,7 @@ import androidx.documentfile.provider.DocumentFile;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import org.calf.reader.novel.BuildConfig;
 import org.calf.reader.novel.DbHelper;
 import org.calf.reader.novel.MApplication;
@@ -23,17 +24,13 @@ import org.calf.reader.novel.model.ReplaceRuleManager;
 import org.calf.reader.novel.model.TxtChapterRuleManager;
 import org.calf.reader.novel.utils.FileUtils;
 import org.calf.reader.novel.utils.RxUtils;
-import org.calf.reader.novel.utils.TimeUtils;
 import org.calf.reader.novel.utils.XmlUtils;
 import org.calf.reader.novel.utils.ZipUtils;
-import org.calf.reader.novel.utils.web_dav.WebDavFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
@@ -134,12 +131,12 @@ public class DataBackup {
         try {
             FileHelp.deleteFile(zipFilePath);
             if (ZipUtils.zipFiles(filePaths, zipFilePath)) {
-                if (WebDavHelp.initWebDav()) {
-                    new WebDavFile(WebDavHelp.getWebDavUrl() + "YueDu").makeAsDir();
-                    String putUrl = WebDavHelp.getWebDavUrl() + "YueDu/backup" + TimeUtils.date2String(TimeUtils.getNowDate(), new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())) + ".zip";
-                    WebDavFile webDavFile = new WebDavFile(putUrl);
-                    webDavFile.upload(zipFilePath);
-                }
+//                if (WebDavHelp.initWebDav()) {
+//                    new WebDavFile(WebDavHelp.getWebDavUrl() + "YueDu").makeAsDir();
+//                    String putUrl = WebDavHelp.getWebDavUrl() + "YueDu/backup" + TimeUtils.date2String(TimeUtils.getNowDate(), new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())) + ".zip";
+//                    WebDavFile webDavFile = new WebDavFile(putUrl);
+//                    webDavFile.upload(zipFilePath);
+//                }
             }
         } catch (Exception e) {
             e.printStackTrace();

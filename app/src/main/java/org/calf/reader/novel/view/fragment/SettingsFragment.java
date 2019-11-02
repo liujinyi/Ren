@@ -12,6 +12,7 @@ import android.preference.PreferenceScreen;
 import androidx.appcompat.app.AlertDialog;
 
 import com.hwangjr.rxbus.RxBus;
+
 import org.calf.reader.novel.MApplication;
 import org.calf.reader.novel.R;
 import org.calf.reader.novel.constant.RxBusTag;
@@ -20,11 +21,10 @@ import org.calf.reader.novel.help.FileHelp;
 import org.calf.reader.novel.help.ProcessTextHelp;
 import org.calf.reader.novel.help.permission.Permissions;
 import org.calf.reader.novel.help.permission.PermissionsCompat;
-
 import org.calf.reader.novel.utils.FileUtils;
 import org.calf.reader.novel.utils.theme.ATH;
-import org.calf.reader.novel.widget.filepicker.picker.FilePicker;
 import org.calf.reader.novel.view.activity.SettingActivity;
+import org.calf.reader.novel.widget.filepicker.picker.FilePicker;
 
 import java.util.Objects;
 
@@ -105,9 +105,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference.getKey().equals(getString(R.string.pk_download_path))) {
             selectDownloadPath(preference);
-        } else if (preference.getKey().equals("webDavSetting")) {
-            WebDavSettingsFragment webDavSettingsFragment = new WebDavSettingsFragment();
-            getFragmentManager().beginTransaction().replace(R.id.settingsFrameLayout, webDavSettingsFragment, "webDavSettings").commit();
         } else if (preference.getKey().equals("clearCache")) {
             AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.clear_cache)
